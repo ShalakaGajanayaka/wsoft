@@ -1,6 +1,26 @@
-import { Link } from 'react-router-dom';
-
 const Footer = () => {
+  // Handle scroll to top
+  const handleScrollToTop = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
+  // Handle newsletter form submission
+  const handleNewsletterSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const email = formData.get('email') || (form.querySelector('input[type="email"]') as HTMLInputElement)?.value;
+    
+    if (email) {
+      alert(`Thank you for subscribing!\n\nEmail: ${email}\n\nYou will receive our latest updates.`);
+      form.reset();
+    }
+  };
+
   return (
     <footer className="footer-area">
       <div className="footer-widget-wrapper-box">
@@ -8,7 +28,7 @@ const Footer = () => {
           <div className="footer-widget-wrapper">
             <div className="footer-widget-box">
               <div className="footer-logo">
-                <Link to="/"><img src="/assets/imgs/logo/logo-light.png" alt="image" /></Link>
+                <a href="#" onClick={handleScrollToTop}><img src="/assets/imgs/logo/logo-light.png" alt="image" /></a>
               </div>
               <div className="footer-text">
                 <p className="text">we are passionate about empowering businesses through innovative and reliable technology solutions.</p>
@@ -44,11 +64,11 @@ const Footer = () => {
             <div className="footer-widget-box">
               <h2 className="footer-widget-title">Our Services</h2>
               <ul className="footer-nav-list">
-                <li><a href="#"><i className="fa-solid fa-chevron-right"></i>Database Solution</a></li>
-                <li><a href="#"><i className="fa-solid fa-chevron-right"></i>Data Protection</a></li>
-                <li><a href="#"><i className="fa-solid fa-chevron-right"></i>App Development</a></li>
-                <li><a href="#"><i className="fa-solid fa-chevron-right"></i>Machine Learning</a></li>
-                <li><a href="#"><i className="fa-solid fa-chevron-right"></i>Helpdesk Services</a></li>
+                <li><a href="#" onClick={handleScrollToTop}><i className="fa-solid fa-chevron-right"></i>Database Solution</a></li>
+                <li><a href="#" onClick={handleScrollToTop}><i className="fa-solid fa-chevron-right"></i>Data Protection</a></li>
+                <li><a href="#" onClick={handleScrollToTop}><i className="fa-solid fa-chevron-right"></i>App Development</a></li>
+                <li><a href="#" onClick={handleScrollToTop}><i className="fa-solid fa-chevron-right"></i>Machine Learning</a></li>
+                <li><a href="#" onClick={handleScrollToTop}><i className="fa-solid fa-chevron-right"></i>Helpdesk Services</a></li>
               </ul>
             </div>
             <div className="footer-widget-box">
@@ -57,26 +77,26 @@ const Footer = () => {
                 <div className="footer-blog-wrapper">
                   <article className="footer-blog">
                     <div className="thumb">
-                      <Link to="/blog-details"><img src="/assets/imgs/blog/blog-9.webp" alt="blog image" /></Link>
+                      <a href="#" onClick={handleScrollToTop}><img src="/assets/imgs/blog/blog-9.webp" alt="blog image" /></a>
                     </div>
                     <div className="content">
                       <div className="meta">
                         <span className="date"><i className="fa-regular fa-clock"></i>15th Oct, 2025</span>
                       </div>
-                      <h2 className="title"><Link to="/blog-details">Why Your Business Needs</Link></h2>
-                      <Link to="/blog-details" className="blog-btn">Read More <i className="fa-solid fa-arrow-right"></i></Link>
+                      <h2 className="title"><a href="#" onClick={handleScrollToTop}>Why Your Business Needs</a></h2>
+                      <a href="#" onClick={handleScrollToTop} className="blog-btn">Read More <i className="fa-solid fa-arrow-right"></i></a>
                     </div>
                   </article>
                   <article className="footer-blog">
                     <div className="thumb">
-                      <Link to="/blog-details"><img src="/assets/imgs/blog/blog-10.webp" alt="blog image" /></Link>
+                      <a href="#" onClick={handleScrollToTop}><img src="/assets/imgs/blog/blog-10.webp" alt="blog image" /></a>
                     </div>
                     <div className="content">
                       <div className="meta">
                         <span className="date"><i className="fa-regular fa-clock"></i>15th Oct, 2025</span>
                       </div>
-                      <h2 className="title"><Link to="/blog-details">Small Business Essentials</Link></h2>
-                      <Link to="/blog-details" className="blog-btn">Read More <i className="fa-solid fa-arrow-right"></i></Link>
+                      <h2 className="title"><a href="#" onClick={handleScrollToTop}>Small Business Essentials</a></h2>
+                      <a href="#" onClick={handleScrollToTop} className="blog-btn">Read More <i className="fa-solid fa-arrow-right"></i></a>
                     </div>
                   </article>
                 </div>
@@ -98,9 +118,9 @@ const Footer = () => {
               </div>
             </div>
             <div className="footer-newsletter-form">
-              <form action="#" className="footer-subscribe-form">
+              <form onSubmit={handleNewsletterSubmit} className="footer-subscribe-form">
                 <div className="input-field">
-                  <input type="email" placeholder="Enter Your Email" />
+                  <input type="email" name="email" placeholder="Enter Your Email" required />
                   <button type="submit" className="rr-btn">
                     <span className="btn-wrap">
                       <span className="text-one">Subscribe Now</span>
@@ -120,9 +140,9 @@ const Footer = () => {
               <p className="text">Copyright @ 2025 <a href="#">WSOFTGLOBAL</a>. All Rights Received.</p>
             </div>
             <div className="copyright-link">
-              <Link to="/contact">Privacy policy</Link>
-              <Link to="/contact">Terms of use</Link>
-              <Link to="/contact">Site map</Link>
+              <a href="#" onClick={handleScrollToTop}>Privacy policy</a>
+              <a href="#" onClick={handleScrollToTop}>Terms of use</a>
+              <a href="#" onClick={handleScrollToTop}>Site map</a>
             </div>
           </div>
         </div>
