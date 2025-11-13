@@ -55,7 +55,7 @@ export const useTemplateScripts = () => {
           if (device_width > 767) {
             if (typeof window.ScrollSmoother !== 'undefined' && typeof window.gsap !== 'undefined') {
               try {
-                const smoother = window.ScrollSmoother.create({
+                window.ScrollSmoother.create({
                   smooth: 1.5,
                   effects: device_width < 1025 ? false : true,
                   smoothTouch: 0.1,
@@ -203,7 +203,7 @@ export const useTemplateScripts = () => {
           setTimeout(() => {
             if (!animationCompleted && loaderWrap && loaderWrap.parentNode) {
               try {
-                $(loaderWrap).fadeOut(500, function () {
+                $(loaderWrap).fadeOut(500, function (this: HTMLElement) {
                   if (this.parentNode) {
                     this.remove();
                   }
@@ -349,7 +349,7 @@ export const useTemplateScripts = () => {
                     })
                     .one(
                       "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend",
-                      function () {
+                      function (this: HTMLElement) {
                         $(this).removeClass(anim + " animated");
                       }
                     );

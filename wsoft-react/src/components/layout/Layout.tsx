@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import Loader from './Loader';
 import ScrollToTop from './ScrollToTop';
 import Sidebar from './Sidebar';
