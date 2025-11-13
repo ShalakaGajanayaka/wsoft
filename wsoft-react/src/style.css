@@ -48,3 +48,20 @@ h1 {
     background-color: #f9f9f9;
   }
 }
+
+/* Mobile Navigation Responsive Styles */
+@media only screen and (max-width: 1300px) {
+  .header-area .header-nav {
+    display: none !important;
+  }
+  
+  .header-area .header-offfcanvas {
+    display: block !important;
+  }
+}
+
+@media only screen and (min-width: 1301px) {
+  .header-area .header-offfcanvas {
+    display: none !important;
+  }
+}

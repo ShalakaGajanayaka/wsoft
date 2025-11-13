@@ -249,6 +249,61 @@ export const useTemplateScripts = () => {
           });
         }
 
+        // MeanMenu activation for mobile navigation
+        if ($('.main-menu').length && typeof ($ as any).fn.meanmenu !== 'undefined') {
+          try {
+            $('.main-menu').meanmenu({
+              meanScreenWidth: "1300",
+              meanMenuContainer: '.mobile-menu',
+              meanMenuCloseSize: '28px',
+            });
+            
+            // Handle mobile menu navigation clicks
+            $(document).on('click', '.mobile-menu a[href^="#"]', function (this: HTMLElement) {
+              const e = window.event as Event;
+              if (e) {
+                e.preventDefault();
+              }
+              const href = $(this).attr('href');
+              if (href) {
+                const sectionId = href.replace('#', '');
+                const element = document.getElementById(sectionId);
+                
+                if (element) {
+                  // Close the sidebar first
+                  $(".side-info").removeClass("info-open");
+                  $(".offcanvas-overlay").removeClass("overlay-open");
+                  
+                  // Scroll to section after a short delay
+                  setTimeout(() => {
+                    const offset = 100; // Offset for fixed header
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+                    
+                    window.scrollTo({
+                      top: offsetPosition,
+                      behavior: 'smooth'
+                    });
+                  }, 300);
+                } else {
+                  // If element not found, try navigating to home page with hash
+                  const currentPath = window.location.pathname;
+                  if (currentPath !== '/') {
+                    window.location.href = `/#${sectionId}`;
+                  } else {
+                    // Close sidebar anyway
+                    $(".side-info").removeClass("info-open");
+                    $(".offcanvas-overlay").removeClass("overlay-open");
+                  }
+                }
+              }
+              return false;
+            });
+          } catch (e) {
+            console.warn('MeanMenu initialization error:', e);
+          }
+        }
+
         // Image Reveal Animation (matching main.js exactly)
         const imgRevealElements = document.querySelectorAll(".img-reveal-anim");
         if (imgRevealElements.length > 0 && typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined') {
